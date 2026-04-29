@@ -17,7 +17,7 @@
             @click="activeStep = i"
           >
             <div class="step-left">
-              <div class="step-num">{{ String(i + 1).padStart(2, '0') }}</div>
+              <div class="step-num" :style="{ background: getStepColor(i), borderColor: getStepColor(i) }">{{ String(i + 1).padStart(2, '0') }}</div>
               <div class="step-connector" v-if="i < devProcess.length - 1"></div>
             </div>
             <div class="step-right">
@@ -56,6 +56,15 @@ import { ref, computed } from 'vue'
 import { devProcess } from '../data/content.js'
 const activeStep = ref(0)
 const currentImg = computed(() => '/assets/img/project/' + devProcess[activeStep.value].img)
+
+const getStepColor = (index) => {
+  const total = devProcess.length - 1 || 1
+  const ratio = index / total
+  const r = 0
+  const g = Math.round(102 + (170 - 102) * ratio)
+  const b = Math.round(204 + (85 - 204) * ratio)
+  return `rgb(${r}, ${g}, ${b})`
+}
 </script>
 
 <style scoped>
@@ -79,12 +88,12 @@ const currentImg = computed(() => '/assets/img/project/' + devProcess[activeStep
   width: 40px; height: 40px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   font-size: 13px; font-weight: 700;
-  background: white; color: var(--text-muted);
-  border: 2px solid var(--border);
+  color: white;
+  border: 2px solid transparent;
   transition: all 0.25s ease; flex-shrink: 0;
 }
 .step-item.active .step-num {
-  background: var(--blue); color: white; border-color: var(--blue);
+  opacity: 1;
   box-shadow: 0 4px 16px rgba(0,102,204,0.3);
 }
 .step-connector {
@@ -92,7 +101,8 @@ const currentImg = computed(() => '/assets/img/project/' + devProcess[activeStep
   background: linear-gradient(to bottom, var(--border), transparent);
   margin: 4px auto;
 }
-.step-item.active .step-connector { background: linear-gradient(to bottom, var(--blue), transparent); }
+.step-item.active .step-connector { background: linear-gradient(to bottom, var(--blue), var(--green)); }
+.step-item.active .step-connector { background: linear-gradient(to bottom, var(--blue), var(--green)); }
 .step-right { padding-top: 8px; }
 .step-right h5 { font-size: 16px; font-weight: 600; color: var(--text-muted); transition: color 0.2s; }
 .step-item.active .step-right h5 { color: var(--blue); }

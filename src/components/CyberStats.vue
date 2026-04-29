@@ -95,12 +95,12 @@
             :key="step.step"
             :style="{ animationDelay: `${index * 0.1}s` }"
           >
-            <div class="step-number">{{ String(index + 1).padStart(2, '0') }}</div>
+            <div class="step-number" :style="{ color: getStepColor(index) }">{{ String(index + 1).padStart(2, '0') }}</div>
             <div class="step-content">
               <h4 class="step-title">{{ step.step }}</h4>
               <p class="step-desc">{{ step.desc }}</p>
             </div>
-            <div class="step-line" v-if="index < devSteps.length - 1"></div>
+            <div class="step-line"></div>
           </div>
         </div>
       </div>
@@ -116,6 +116,16 @@
 
 <script setup>
 import { onMounted } from 'vue'
+
+// 蓝到绿渐变：01蓝 → 07绿
+const getStepColor = (index) => {
+  const total = devSteps.length - 1 || 1
+  const ratio = index / total
+  const r = 0
+  const g = Math.round(102 + (170 - 102) * ratio)
+  const b = Math.round(204 + (85 - 204) * ratio)
+  return `rgb(${r}, ${g}, ${b})`
+}
 
 const stats = [
   {
@@ -438,14 +448,14 @@ onMounted(() => {
   flex: 1;
   text-align: center;
   animation: fade-in-up 0.6s ease-out backwards;
+  display: flex;
+  flex-direction: column;
 }
 
 .step-number {
   font-family: var(--font-display);
   font-size: 32px;
   font-weight: 700;
-  color: var(--neon-cyan);
-  text-shadow: var(--glow-cyan);
   margin-bottom: 16px;
 }
 
@@ -455,6 +465,10 @@ onMounted(() => {
   border-radius: var(--radius);
   padding: 24px 16px;
   transition: all var(--transition);
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .process-step:hover .step-content {
@@ -484,6 +498,7 @@ onMounted(() => {
   height: 2px;
   background: var(--gradient-neon);
 }
+.process-step:last-child .step-line { display: none; }
 
 /* 背景装饰 */
 .stats-bg {
