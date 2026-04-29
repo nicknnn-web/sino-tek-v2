@@ -1,7 +1,8 @@
 <template>
-  <section class="partners section-bg" style="padding: 40px 0;">
-    <div class="container">
-      <h6 class="partners-title" data-aos="fade-up">35+ 合作企业及机构</h6>
+  <section class="partners section-blue">
+    <div class="container partners-header">
+      <span class="section-label" style="color: rgba(255,255,255,0.7)">合作客户</span>
+      <p class="partners-sub">已服务超过 35 家企业和机构，覆盖金融、司法、医疗、教育等关键领域</p>
     </div>
     <div class="marquee-wrap">
       <div class="marquee-track">
@@ -16,31 +17,23 @@ import { partners } from '../data/content.js'
 </script>
 
 <style scoped>
-.partners-title {
-  text-align: center;
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--text);
-  margin-bottom: 28px;
-}
-.marquee-wrap { overflow: hidden; padding: 8px 0; }
+.partners { padding: 56px 0; }
+.partners-header { text-align: center; margin-bottom: 40px; }
+.partners-header .section-label::before { background: var(--green); }
+.partners-sub { color: rgba(255,255,255,0.7); font-size: 16px; margin-top: 8px; }
+.marquee-wrap { overflow: hidden; }
 .marquee-track {
-  display: flex;
-  gap: 0;
-  animation: marquee 40s linear infinite;
-  width: max-content;
+  display: flex; gap: 0; width: max-content;
+  animation: marquee 50s linear infinite;
 }
 .marquee-track:hover { animation-play-state: paused; }
 .partner-item {
-  white-space: nowrap;
-  padding: 8px 32px;
-  font-size: 15px;
-  color: var(--text-muted);
-  border-right: 1px solid var(--border);
-  transition: color 0.2s;
+  white-space: nowrap; padding: 12px 36px;
+  font-size: 15px; color: rgba(255,255,255,0.75);
+  border-right: 1px solid rgba(255,255,255,0.15);
+  transition: all 0.2s;
 }
-.partner-item:hover { color: var(--primary); }
-
+.partner-item:hover { color: white; background: rgba(255,255,255,0.1); }
 @keyframes marquee {
   0%   { transform: translateX(0); }
   100% { transform: translateX(-50%); }

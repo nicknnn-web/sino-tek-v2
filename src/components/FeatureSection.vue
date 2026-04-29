@@ -5,17 +5,18 @@
         <div
           v-for="(f, i) in features"
           :key="i"
-          :class="['feature-card', { active: f.active }]"
+          :class="['feature-card', { blue: i % 2 === 0, green: i % 2 !== 0 }]"
           data-aos="fade-up"
-          :data-aos-delay="i * 150"
+          :data-aos-delay="i * 100"
         >
           <div class="feature-icon">
-            <img :src="`/assets/img/feature/${f.icon}`" :alt="f.title" @error="useFallbackIcon" />
+            <img :src="'/assets/img/feature/' + f.icon" :alt="f.title" @error="useFallbackIcon" />
           </div>
           <div class="feature-body">
             <span class="feature-tag">{{ f.tag }}</span>
             <h3>{{ f.title }}</h3>
           </div>
+          <div class="feature-arrow">›</div>
         </div>
       </div>
     </div>
@@ -24,36 +25,50 @@
 
 <script setup>
 import { features } from '../data/content.js'
-function useFallbackIcon(e) {
-  e.target.style.display = 'none'
-}
+function useFallbackIcon(e) { e.target.style.display = 'none' }
 </script>
 
 <style scoped>
-.features { background: white; padding: 60px 0; }
-.features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.features { background: var(--bg-section); }
+.features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .feature-card {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  padding: 28px 32px;
-  border-radius: var(--radius);
+  display: flex; align-items: center; gap: 20px;
+  padding: 28px 32px; border-radius: var(--radius);
   border: 1px solid var(--border);
-  transition: var(--transition);
-  background: white;
+  background: white; cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative; overflow: hidden;
 }
-.feature-card:hover, .feature-card.active {
-  background: var(--primary);
-  border-color: var(--primary);
-  color: white;
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
+.feature-card::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+  transform: scaleX(0); transition: transform 0.3s ease;
 }
-.feature-icon { flex-shrink: 0; width: 56px; height: 56px; display: flex; align-items: center; justify-content: center; }
-.feature-icon img { width: 48px; height: 48px; object-fit: contain; }
-.feature-tag { font-size: 13px; color: var(--primary); font-weight: 600; letter-spacing: 1px; }
-.feature-card.active .feature-tag, .feature-card:hover .feature-tag { color: rgba(255,255,255,0.8); }
-.feature-body h3 { font-size: 18px; font-weight: 700; margin-top: 4px; }
+.feature-card.blue::before { background: var(--blue); }
+.feature-card.green::before { background: var(--green); }
+.feature-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: transparent; }
+.feature-card:hover::before { transform: scaleX(1); }
+
+.feature-icon { flex-shrink: 0; width: 52px; height: 52px; }
+.feature-icon img { width: 100%; height: 100%; object-fit: contain; }
+.feature-body { flex: 1; }
+.feature-tag {
+  font-size: 12px; font-weight: 600; letter-spacing: 1px;
+  color: var(--text-muted); text-transform: uppercase;
+  display: block; margin-bottom: 4px;
+}
+.feature-card.blue:hover .feature-tag { color: var(--blue); }
+.feature-card.green:hover .feature-tag { color: var(--green); }
+.feature-body h3 { font-size: 17px; font-weight: 700; }
+.feature-arrow {
+  font-size: 24px; color: var(--border);
+  transition: all 0.3s ease; font-weight: 300;
+}
+.feature-card:hover .feature-arrow {
+  color: var(--blue);
+  transform: translateX(4px);
+}
+.feature-card.green:hover .feature-arrow { color: var(--green); }
 
 @media (max-width: 768px) {
   .features-grid { grid-template-columns: 1fr; }
