@@ -4,7 +4,7 @@
       <div class="service-grid">
         <!-- 左侧 -->
         <div class="service-image-wrap" data-aos="fade-right">
-          <img :src="'/assets/img/feature/trusted-1.jpg'" alt="飞鹤盛元科技" class="service-img" />
+          <img :src="'/assets/img/feature/trusted-1.jpg'" alt="飞鹏盛元科技" class="service-img" />
           <!-- 叠加数字 -->
           <div class="stats-badge">
             <div v-for="s in serviceIntro.stats" :key="s.label" class="stat-item">
@@ -112,7 +112,10 @@ const currentTab = computed(() => serviceIntro.tabs.find(t => t.id === activeTab
 .fade-enter-from, .fade-leave-to { opacity: 0; }
 
 @media (max-width: 900px) {
-  .service-grid { grid-template-columns: 1fr; gap: 80px; }
+  .service-grid { grid-template-columns: 1fr; gap: 48px; }
   .stats-badge { position: relative; bottom: auto; right: auto; margin-top: 24px; justify-content: center; }
+}
+@media (max-width: 600px) {
+  .service-img { height: 240px; }
 }
 </style>

@@ -11,7 +11,7 @@
               <span class="brand-text">{{ company.name }}</span>
             </div>
             <p class="footer-desc">
-              天津飞鹤盛元科技发展有限公司，专注软件定制开发 20 年，为金融、司法、医疗、教育等行业提供专业的技术解决方案。
+              天津飞鹏盛元科技发展有限公司，专注软件定制开发 20 年，为金融、司法、医疗、教育等行业提供专业的技术解决方案。
             </p>
             <div class="footer-contact">
               <a :href="'mailto:' + company.email" class="contact-item">

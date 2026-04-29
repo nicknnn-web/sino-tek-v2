@@ -5,7 +5,7 @@
         <img :src="logoUrl" alt="SINO-TEK" class="nav-logo-img" @error="hideImg" />
         <div class="nav-brand">
           <span class="brand-name">SINO-TEK</span>
-          <span class="brand-sub">飞鹤盛元</span>
+          <span class="brand-sub">飞鹏盛元</span>
         </div>
       </a>
 

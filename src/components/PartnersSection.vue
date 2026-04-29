@@ -6,7 +6,7 @@
     </div>
     <div class="marquee-wrap">
       <div class="marquee-track">
-        <span v-for="(p, i) in [...partners, ...partners]" :key="i" class="partner-item">{{ p }}</span>
+        <span v-for="(p, i) in [...partners, ...partners]" :key="`${p}-${i}`" class="partner-item">{{ p }}</span>
       </div>
     </div>
   </section>

@@ -94,6 +94,7 @@ import { projects } from '../data/content.js'
 .card-link:hover { gap: 8px; }
 
 @media (max-width: 768px) {
-  .projects-track { padding: 0 20px; }
+  .projects-track { padding: 0 20px; width: calc(100vw - 40px); }
+  .project-card { width: calc(100vw - 80px); max-width: 360px; }
 }
 </style>

@@ -123,11 +123,12 @@ const modules = [Autoplay, EffectFade, Pagination]
 }
 .hero-stats { display: flex; justify-content: center; gap: 64px; }
 .hero-stat { display: flex; flex-direction: column; align-items: center; gap: 4px; }
-.stat-num { font-size: 28px; font-weight: 700; color: var(--blue); line-height: 1; }
+.stat-num { font-size: clamp(20px, 4vw, 28px); font-weight: 700; color: var(--blue); line-height: 1; }
 .stat-label { font-size: 13px; color: var(--text-muted); white-space: nowrap; }
 
 @media (max-width: 768px) {
   .slide-actions { flex-direction: column; }
-  .hero-stats { gap: 32px; flex-wrap: wrap; }
+  .hero-stats { gap: 24px; flex-wrap: wrap; justify-content: center; }
+  .hero-stat { flex-direction: row; gap: 8px; align-items: baseline; }
 }
 </style>
